@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Vue!</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="message">
+    <button v-on:click="addMessage">追加</button>
+    <ul>
+      <li v-for="message in messages">{{ message }}</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: '',
+        messages: ['Hello Vue!']
+      },
+      methods: {
+        addMessage: function () {
+          this.messages.push(this.message)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Vue!</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <router-link to="/first"><button>firstComponent</button></router-link>
+      <router-link to="/second"><button>secondComponent</button></router-link>
+    </div>
+    <router-view></router-view>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+  <script>
+
+    const FirstComponent = {
+      template: `<p>aaa</p>`
+    }
+    const SecondComponent = {
+      template: `<p>bbb</p>`
+    }
+
+    const routes = [
+      { path: '/first', component: FirstComponent },
+      { path: '/second', component: SecondComponent }
+    ]
+
+    const router = new VueRouter({
+      routes
+    })
+
+    const app = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+</html>

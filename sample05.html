@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Vue!</title>
+</head>
+<body>
+  <div id="app1">
+    <button>普通のボタン</button>
+  </div>
+  <div id="app2">
+    <button>普通のボタン</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    const app1 = new Vue({
+      el: '#app1'
+    })
+    
+    const app2 = new Vue({
+      el: '#app2'
+    })
+  </script>
+</body>
+</html>

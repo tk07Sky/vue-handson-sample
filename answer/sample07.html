@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello Vue!</title>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <router-link to="/first"><button>firstComponent</button></router-link>
+      <router-link to="/second"><button>secondComponent</button></router-link>
+    </div>
+    <router-view></router-view>
+    <hr>
+    <main-component></main-component>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+  <script>
+
+    const store = new Vuex.Store({
+      state: {
+        countA: 0,
+        countB: 0
+      },
+      getters: {
+        getCountA (state) {
+          return state.countA
+        },
+        getCountB (state) {
+          return state.countB
+        }
+      },
+      mutations: {
+        incrementCountA (state) {
+          state.countA++
+        },
+        incrementCountB (state) {
+          state.countB++
+        }
+      },
+      actions: {
+        incrementA ({commit}) {
+          commit('incrementCountA')
+        },
+        incrementB ({commit}) {
+          commit('incrementCountB')
+        }
+      }
+    })
+
+    const MainComponent = {
+      template: `
+        <div>
+          <h1>Watch Store</h1>
+          <p>incrementA: {{ $store.getters['getCountA'] }}</p>
+          <p>incrementB: {{ $store.getters['getCountB'] }}</p>
+        </div>
+      `
+    }
+
+    const FirstComponent = {
+      template: `
+        <div>
+          <p>{{ $store.getters['getCountA'] }}</p>
+          <button @click="$store.dispatch('incrementA')">increment</button>
+        </div>
+      `
+    }
+    const SecondComponent = {
+      template: `
+        <div>
+          <p>{{ $store.getters['getCountB'] }}</p>
+          <button @click="$store.dispatch('incrementB')">increment</button>
+        </div>
+      `
+    }
+
+    const routes = [
+      { path: '/first', component: FirstComponent },
+      { path: '/second', component: SecondComponent }
+    ]
+
+    const router = new VueRouter({
+      routes
+    })
+
+    const app = new Vue({
+      el: '#app',
+      router,
+      store,
+      components: {
+        MainComponent
+      }
+    })
+  </script>
+</body>
+</html>
